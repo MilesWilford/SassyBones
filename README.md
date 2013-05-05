@@ -8,6 +8,9 @@ Using extensions feels right to me because it makes the CSS feel very object-ori
 using a mixin to just drop some code inside of a bunch of defined classes repeatedly, we instead specify a base
 object using the SASS placeholder (`%`) and extend those classes with the page's custom classes.
 
+I made this because I really dislike grid systems and wanted to see if I could make a system I didn't hate using.
+I don't think I was successful; grids still don't feel good to me.  This one is at least servicable, though.
+
 Preqrequisites
 -----------
 This uses [SASS](http://sass-lang.com/).  That's it.
