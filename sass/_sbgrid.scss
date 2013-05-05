@@ -12,17 +12,17 @@
 
 // Variables
 
-$grid-base:   960px !default;
+$grid-base:    960px !default;
 $column-count: 16 !default;
-$gutter: 10px !default;
-$row-break: $gutter * 2 !default;
+$gutter:       10px !default;
+$row-break:    $gutter * 2 !default;
 
 
-$breakpoint-tablet-portrait: 959px !default;
+$breakpoint-tablet-portrait:  959px !default;
 $breakpoint-mobile-landscape: 768px !default;
   $mobile-landscape-colwidth: 420px !default;
-$breakpoint-mobile-portrait: 480px !default;
-  $mobile-portrait-colwidth: 300px !default;
+$breakpoint-mobile-portrait:  480px !default;
+  $mobile-portrait-colwidth:  300px !default;
 
 // Mixins
 
