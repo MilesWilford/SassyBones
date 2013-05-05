@@ -1,0 +1,188 @@
+// SassyBones beta
+// A drop-in SCSS file that creates a dead simple, lightweight CSS grid using
+// object-like extensions rather than mixins.
+//
+// This grid is derrived from Skeleton V1.2 and the following is the original license:
+//  >Copyright 2011, Dave Gamache
+//  >www.getskeleton.com
+//  >Free to use under the MIT license.
+//  >http://www.opensource.org/licenses/mit-license.php
+//  >6/20/2012
+
+
+// Variables
+
+$grid-base:   960px !default;
+$column-count: 16 !default;
+$gutter: 10px !default;
+$row-break: $gutter * 2 !default;
+
+
+$breakpoint-tablet-portrait: 959px !default;
+$breakpoint-mobile-landscape: 768px !default;
+  $mobile-landscape-colwidth: 420px !default;
+$breakpoint-mobile-portrait: 480px !default;
+  $mobile-portrait-colwidth: 300px !default;
+
+// Mixins
+
+// $gb = $grid-base, $cc = $column-count, $gut = $gutter, $rb = $row-break
+// I am not sure of variable scope in SASS, so I am being careful
+// not to re-use variable names for now.
+@mixin grid ($gb     : $grid-base,
+             $cc     : $column-count,
+             $gut    : $gutter,
+             $rb     : $row-break,
+             $mobile : false) {
+  @if $mobile {
+    $width: $gb;
+    // The grid
+    %sb-1-col,
+    %sb-1-cols {
+      width: $width;
+    }
+
+    @for $i from 2 through $column-count {
+      %sb-#{$i}-cols {
+        width: $width;
+      }
+    }
+
+    // Thirds
+    %sb-third,
+    %sb-1-third,
+    %sb-1-thirds {
+      width: $width;
+    }
+    %sb-2-third,
+    %sb-2-thirds {
+      width: $width;
+    }
+
+    // Offsets
+    @for $i from 1 through ($column-count - 1) {
+      %sb-offset-#{$i} {
+        &:before {
+          display: none;
+        }
+      }
+    }
+  } @else {
+    // The grid
+    %sb-1-col,
+    %sb-1-cols {
+      width: ($gb / $cc) - (2 * $gut);
+    }
+
+    @for $i from 2 through $cc {
+      %sb-#{$i}-cols {
+        width: (($gb / $cc) * $i) - (2 * $gut);
+      }
+    }
+
+    // Thirds
+    $sb-third: ($gb - (2 * $gut)) / 3;
+
+    %sb-third,
+    %sb-1-third,
+    %sb-1-thirds {
+      width: floor($sb-third); // I am chosing deliberately to round down
+    }
+    %sb-2-third,
+    %sb-2-thirds {
+      width: floor($sb-third * 2);
+    }
+
+    // Offsets
+    @for $i from 1 through ($cc - 1) {
+      %sb-offset-#{$i} {
+        &:before {
+          display: block;
+          content: "\0020";
+          float: left;
+          width: (($gb / $cc) * $i);
+        }
+      }
+    }
+  }
+}
+// Clearing
+
+// Use clearfix class on parent to clear nested columns,
+// or wrap each row of columns in a <div class="row">
+%clearfix {
+  &:before,
+  &:after {
+    content: '\0020';
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
+  &:after {
+    clear: both;
+    zoom: 1;
+  }
+}
+
+// You can also use a <br class="clear" /> to clear columns
+%clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+// Building Blocks
+%sb-container {
+  position: relative;
+  width: $grid-base;
+  margin: 0 auto;
+  padding: 0;
+  &:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
+
+%sb-column,
+%sb-columns {
+  float: left;
+  display: block;
+  margin: 0 $gutter;
+}
+
+%sb-row {
+  margin-bottom: $row-break;
+  @extend %clearfix;
+}
+
+// Endstops
+%sb-alpha {margin-left: 0;}
+
+%sb-omega {margin-right: 0;}
+
+@include grid($grid-base, $column-count, $gutter, $row-break);
+
+// Tablet (Portrait)
+@media only screen and (min-width: $breakpoint-mobile-landscape)
+                   and (max-width: $breakpoint-tablet-portrait) {
+  @include grid($gb : 768px);
+}
+
+// Mobile (Landscape)
+@media only screen and (min-width: $breakpoint-mobile-portrait)
+                   and (max-width: $breakpoint-mobile-landscape - 1) {
+  @include grid($gb : $mobile-landscape-colwidth, $mobile : true);
+}
+
+// Mobile (Portrait)
+@media only screen and (max-width: $breakpoint-mobile-landscape - 1) {
+  @include grid($gb : $mobile-portrait-colwidth, $mobile : true);
+}
