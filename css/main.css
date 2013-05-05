@@ -1,2 +1,202 @@
 /* SassyBones beta */
+nav:before, .content:before, nav:after, .content:after {
+  content: '\0020';
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0; }
+nav:after, .content:after {
+  clear: both;
+  zoom: 1; }
+
+.container {
+  position: relative;
+  width: 960px;
+  margin: 0 auto;
+  padding: 0; }
+  .container:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; }
+
+.content, .columns, footer {
+  float: left;
+  display: block;
+  margin: 0 10px; }
+
+nav, .content {
+  margin-bottom: 20px; }
+
+.content .right {
+  float: left;
+  display: block;
+  margin: 0 10px;
+  width: 160px; }
+
+nav li, .content .left, .columns div:last-child {
+  float: left;
+  display: block;
+  margin: 0 10px;
+  width: 220px; }
+
+.content .main {
+  float: left;
+  display: block;
+  margin: 0 10px;
+  width: 520px; }
+
+.columns div:first-child {
+  float: left;
+  display: block;
+  margin: 0 10px;
+  width: 313px; }
+
+.columns div:last-child {
+  margin-left: 180px; }
+
+nav li:first-of-type, .content .left {
+  margin-left: 0; }
+
+nav li:last-of-type, .content .right {
+  margin-right: 0; }
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  .container {
+    width: 768px; }
+
+  .content .right {
+    float: left;
+    display: block;
+    margin: 0 10px;
+    width: 124px; }
+
+  nav li, .content .left, .columns div:last-child {
+    float: left;
+    display: block;
+    margin: 0 10px;
+    width: 172px; }
+
+  .content .main {
+    float: left;
+    display: block;
+    margin: 0 10px;
+    width: 412px; }
+
+  .columns div:first-child {
+    float: left;
+    display: block;
+    margin: 0 10px;
+    width: 249px; }
+
+  .columns div:last-child {
+    margin-left: 144px; }
+
+  nav li:first-of-type, .content .left {
+    margin-left: 0; }
+
+  nav li:last-of-type, .content .right {
+    margin-right: 0; } }
+@media only screen and (max-width: 767px) {
+  .container {
+    width: 300px; }
+
+  nav li:first-of-type, .content .left {
+    margin-left: 10px !important; }
+
+  nav li:last-of-type, .content .right {
+    margin-right: 10px !important; }
+
+  .content .right {
+    float: left;
+    display: block;
+    margin: 0 10px;
+    width: 300px; }
+
+  nav li, .content .left, .columns div:last-child {
+    float: left;
+    display: block;
+    margin: 0 10px;
+    width: 300px; }
+
+  .content .main {
+    float: left;
+    display: block;
+    margin: 0 10px;
+    width: 300px; }
+
+  .columns div:first-child {
+    float: left;
+    display: block;
+    margin: 0 10px;
+    width: 300px; } }
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .container {
+    width: 420px; }
+
+  nav li:first-of-type, .content .left {
+    margin-left: 10px !important; }
+
+  nav li:last-of-type, .content .right {
+    margin-right: 10px !important; }
+
+  .content .right {
+    float: left;
+    display: block;
+    margin: 0 10px;
+    width: 420px; }
+
+  nav li, .content .left, .columns div:last-child {
+    float: left;
+    display: block;
+    margin: 0 10px;
+    width: 420px; }
+
+  .content .main {
+    float: left;
+    display: block;
+    margin: 0 10px;
+    width: 420px; }
+
+  .columns div:first-child {
+    float: left;
+    display: block;
+    margin: 0 10px;
+    width: 420px; } }
 /* End SassyBones */
+body {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; }
+
+a {
+  color: #530;
+  text-decoration: none; }
+
+nav {
+  text-align: center; }
+  nav ul {
+    display: inline;
+    padding: 0; }
+  nav li {
+    list-style: none; }
+  nav a {
+    display: block;
+    padding: 15px 0; }
+    nav a:hover {
+      background-color: #EEE; }
+
+.content {
+  margin: 0;
+  border: 1px #000 solid; }
+  .content .left {
+    background-color: #EFA; }
+  .content .right {
+    background-color: #FAE; }
+  .content p {
+    padding: 10px; }
+
+.columns {
+  margin: 20px 0; }
+  .columns div {
+    background-color: #EFA; }

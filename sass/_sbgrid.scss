@@ -19,6 +19,7 @@ $row-break:    $gutter * 2 !default;
 
 
 $breakpoint-tablet-portrait:  959px !default;
+  $tablet-portrait-colwidth:  768px !default;
 $breakpoint-mobile-landscape: 768px !default;
   $mobile-landscape-colwidth: 420px !default;
 $breakpoint-mobile-portrait:  480px !default;
@@ -54,21 +55,15 @@ $breakpoint-mobile-portrait:  480px !default;
     %sb-third,
     %sb-1-third,
     %sb-1-thirds {
+      @include sb-column;
       width: $width;
     }
     %sb-2-third,
     %sb-2-thirds {
+      @include sb-column;
       width: $width;
     }
 
-    // Offsets
-    @for $i from 1 through ($column-count - 1) {
-      %sb-offset-#{$i} {
-        &:before {
-          display: none;
-        }
-      }
-    }
   } @else {
     // The grid
     %sb-1-col,
@@ -90,23 +85,29 @@ $breakpoint-mobile-portrait:  480px !default;
     %sb-third,
     %sb-1-third,
     %sb-1-thirds {
+      @include sb-column;
       width: floor($sb-third); // I am chosing deliberately to round down
     }
     %sb-2-third,
     %sb-2-thirds {
+      @include sb-column;
       width: floor($sb-third * 2); // I am chosing deliberately to round down
     }
 
     // Offsets
     @for $i from 1 through ($cc - 1) {
       %sb-offset-#{$i} {
-        &:before {
-          display: block;
-          content: "\0020";
-          float: left;
-          width: (($gb / $cc) * $i);
-        }
+        margin-left: (($gb / $cc) * $i);
       }
+    }
+
+    // Endstops
+    %sb-alpha {
+      margin-left: 0;
+    }
+
+    %sb-omega {
+      margin-right: 0;
     }
   }
 }
@@ -171,27 +172,36 @@ $breakpoint-mobile-portrait:  480px !default;
   @extend %clearfix;
 }
 
-// Endstops
-%sb-alpha {margin-left: 0;}
-
-%sb-omega {margin-right: 0;}
-
 @include grid;
 
 // Tablet (Portrait)
 @media only screen and (min-width: $breakpoint-mobile-landscape)
                    and (max-width: $breakpoint-tablet-portrait) {
-  @include grid($gb : 768px);
+  %sb-container {
+    width: $tablet-portrait-colwidth;
+  }
+  @include grid($gb : $tablet-portrait-colwidth);
+}
+
+// Mobile (Portrait)
+@media only screen and (max-width: $breakpoint-mobile-landscape - 1) {
+  %sb-container {
+    width: $mobile-portrait-colwidth;
+  }
+  %sb-alpha {margin-left: $gutter !important;}
+  %sb-omega {margin-right: $gutter !important;}
+  @include grid($gb : $mobile-portrait-colwidth, $mobile : true);
 }
 
 // Mobile (Landscape)
 @media only screen and (min-width: $breakpoint-mobile-portrait)
                    and (max-width: $breakpoint-mobile-landscape - 1) {
+  %sb-container {
+    width: $mobile-landscape-colwidth;
+  }
+  %sb-alpha {margin-left: $gutter !important;}
+  %sb-omega {margin-right: $gutter !important;}
   @include grid($gb : $mobile-landscape-colwidth, $mobile : true);
 }
 
-// Mobile (Portrait)
-@media only screen and (max-width: $breakpoint-mobile-landscape - 1) {
-  @include grid($gb : $mobile-portrait-colwidth, $mobile : true);
-}
 /* End SassyBones */

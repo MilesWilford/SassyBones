@@ -1,2 +1,82 @@
 @import "sbgrid";
 
+body {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+a {
+  color: #530;
+  text-decoration: none;
+}
+.container {
+  @extend %sb-container;
+}
+
+  nav {
+    @extend %sb-row;
+    text-align: center;
+    ul {
+      display: inline;
+      padding: 0;
+    }
+    li {
+      list-style: none;
+      @extend %sb-4-cols;
+      &:first-of-type {
+        @extend %sb-alpha;
+      }
+      &:last-of-type {
+        @extend %sb-omega;
+      }
+    }
+    a {
+      display: block;
+      padding: 15px 0;
+      &:hover {
+        background-color: #EEE;
+      }
+    }
+  }
+
+  .content {
+    @extend %sb-column;
+    @extend %sb-row;
+    margin: 0;
+    border: 1px #000 solid;
+
+    .left {
+      @extend %sb-4-cols;
+      @extend %sb-alpha;
+      background-color: #EFA;
+    }
+    .main {
+      @extend %sb-9-cols;
+    }
+    .right {
+      @extend %sb-3-cols;
+      @extend %sb-omega;
+      background-color: #FAE;
+    }
+
+    p {
+      padding: 10px;
+    }
+  }
+
+  .columns {
+    @extend %sb-column;
+    margin: 20px 0;
+    div {
+      background-color: #EFA;
+    }
+    div:first-child {
+      @extend %sb-1-third;
+    }
+    div:last-child {
+      @extend %sb-4-cols;
+      @extend %sb-offset-3;
+    }
+  }
+
+  footer {
+    @extend %sb-column;
+  }
