@@ -1,4 +1,4 @@
-// SassyBones beta
+/* SassyBones beta */
 // A drop-in SCSS file that creates a dead simple, lightweight CSS grid using
 // object-like extensions rather than mixins.
 //
@@ -39,11 +39,13 @@ $breakpoint-mobile-portrait:  480px !default;
     // The grid
     %sb-1-col,
     %sb-1-cols {
+      @include sb-column;
       width: $width;
     }
 
     @for $i from 2 through $column-count {
       %sb-#{$i}-cols {
+        @include sb-column;
         width: $width;
       }
     }
@@ -71,11 +73,13 @@ $breakpoint-mobile-portrait:  480px !default;
     // The grid
     %sb-1-col,
     %sb-1-cols {
+      @include sb-column;
       width: ($gb / $cc) - (2 * $gut);
     }
 
     @for $i from 2 through $cc {
       %sb-#{$i}-cols {
+        @include sb-column;
         width: (($gb / $cc) * $i) - (2 * $gut);
       }
     }
@@ -90,7 +94,7 @@ $breakpoint-mobile-portrait:  480px !default;
     }
     %sb-2-third,
     %sb-2-thirds {
-      width: floor($sb-third * 2);
+      width: floor($sb-third * 2); // I am chosing deliberately to round down
     }
 
     // Offsets
@@ -105,6 +109,12 @@ $breakpoint-mobile-portrait:  480px !default;
       }
     }
   }
+}
+
+@mixin sb-column {
+  float: left;
+  display: block;
+  margin: 0 $gutter;
 }
 // Clearing
 
@@ -153,9 +163,7 @@ $breakpoint-mobile-portrait:  480px !default;
 
 %sb-column,
 %sb-columns {
-  float: left;
-  display: block;
-  margin: 0 $gutter;
+  @include sb-column;
 }
 
 %sb-row {
@@ -168,7 +176,7 @@ $breakpoint-mobile-portrait:  480px !default;
 
 %sb-omega {margin-right: 0;}
 
-@include grid($grid-base, $column-count, $gutter, $row-break);
+@include grid;
 
 // Tablet (Portrait)
 @media only screen and (min-width: $breakpoint-mobile-landscape)
@@ -186,3 +194,4 @@ $breakpoint-mobile-portrait:  480px !default;
 @media only screen and (max-width: $breakpoint-mobile-landscape - 1) {
   @include grid($gb : $mobile-portrait-colwidth, $mobile : true);
 }
+/* End SassyBones */
